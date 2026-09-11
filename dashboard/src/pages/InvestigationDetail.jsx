@@ -124,7 +124,7 @@ export default function InvestigationDetail({ investigationId, onBack }) {
         </div>
 
         {/* Threat Score Circle */}
-        <div style={{
+        <div className="threat-score-badge" style={{
           width: 96,
           height: 96,
           borderRadius: '50%',
@@ -386,7 +386,7 @@ export default function InvestigationDetail({ investigationId, onBack }) {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16, borderLeft: '2px solid var(--accent-cyan)', paddingLeft: 20, marginLeft: 10 }}>
             {detail.timeline.map((ev, idx) => (
               <div key={ev.id || idx} style={{ position: 'relative' }}>
-                <div style={{
+                <div className="timeline-dot" style={{
                   position: 'absolute',
                   left: -27,
                   top: 2,

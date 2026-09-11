@@ -868,4 +868,64 @@ svg text[font-family="monospace"] {
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
 }
 
+/* ==========================================================================
+   DOTS & RADAR PIN FIXES
+   ========================================================================== */
+.custom-google-pin {
+  background: transparent !important;
+  border: none !important;
+}
+
+@keyframes ping {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  70%, 100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* Timeline Dots: strictly contained to 12px */
+.timeline-dot,
+div[style*="left: -27"],
+div[style*="left:-27"] {
+  width: 12px !important;
+  height: 12px !important;
+  min-width: 12px !important;
+  min-height: 12px !important;
+  max-width: 12px !important;
+  max-height: 12px !important;
+  border-radius: 50% !important;
+  background: var(--accent-cyan) !important;
+  box-shadow: 0 0 8px var(--accent-cyan) !important;
+  z-index: 2 !important;
+}
+
+/* Map radar pin: strictly contained */
+.custom-google-pin div {
+  box-sizing: border-box !important;
+}
+.custom-google-pin div[style*="border-radius: 50%"],
+.custom-google-pin div[style*="border-radius:50%"] {
+  min-width: unset !important;
+  min-height: unset !important;
+}
+
+/* Threat Score Circle: safely scoped without affecting dots */
+.threat-score-badge,
+div[style*="border: 4px solid"],
+div[style*="border:4px solid"] {
+  min-width: 96px;
+  min-height: 96px;
+  transition: transform 0.3s var(--ease-spring);
+}
+.threat-score-badge:hover,
+div[style*="border: 4px solid"]:hover,
+div[style*="border:4px solid"]:hover {
+  transform: scale(1.06);
+}
+
+
 
