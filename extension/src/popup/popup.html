@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="midnight">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIH-Guard Security</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header with Logo and Theme Toggle -->
+    <header class="header">
+      <div class="logo">
+        <div class="shield-icon-wrap">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div>
+          <h1>SIH-Guard</h1>
+          <span class="subtitle">Email Forensics &amp; Threat Detection</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button id="themeToggleBtn" class="theme-toggle-btn" title="Switch Theme (Midnight Signal / Glass Light)">
+          <span class="theme-icon">✨</span>
+        </button>
+        <div class="status-indicator" id="backendStatus" title="System Connection Status">
+          <span class="dot"></span> <span class="status-text">Protected</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Nimbus Spring Pill Switcher -->
+    <div class="switcher">
+      <div class="pill-track">
+        <div class="pill-bg" id="pillBg"></div>
+        <button class="tab-btn active" data-tab="activeTab">Current Mail</button>
+        <button class="tab-btn" data-tab="presetsTab">Demo Cases</button>
+        <button class="tab-btn" data-tab="emlTab">EML / Custom</button>
+      </div>
+    </div>
+
+    <!-- TAB 1: Gmail Active Email -->
+    <section id="activeTab" class="tab-content active">
+      <div class="card email-card">
+        <div class="card-header">
+          <span class="label">Mailbox Target</span>
+          <span class="badge" id="gmailStatusBadge">Gmail Active</span>
+        </div>
+        <div class="email-meta" id="emailMeta">
+          <div class="meta-row"><span class="meta-key">Subject:</span> <span id="metaSubject" class="meta-val">Ready to inspect</span></div>
+          <div class="meta-row"><span class="meta-key">Sender:</span> <span id="metaSender" class="meta-val">—</span></div>
+        </div>
+        <button id="btnAnalyzeActive" class="btn btn-primary primary-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          Scan This Message
+        </button>
+      </div>
+    </section>
+
+    <!-- TAB 2: Demo Presets -->
+    <section id="presetsTab" class="tab-content">
+      <div class="preset-buttons">
+        <button class="preset-btn danger" data-preset="paypal">
+          <div class="preset-badge danger">HIGH RISK</div>
+          <div class="preset-info">
+            <strong>PayPal Urgent Phishing</strong>
+            <small>Credential harvesting, IP URL &amp; SPF failure</small>
+          </div>
+        </button>
+        <button class="preset-btn warning" data-preset="m365">
+          <div class="preset-badge warning">SUSPICIOUS</div>
+          <div class="preset-info">
+            <strong>Microsoft 365 BEC Spoof</strong>
+            <small>Punycode domain &amp; fake security prompt</small>
+          </div>
+        </button>
+        <button class="preset-btn safe" data-preset="benign">
+          <div class="preset-badge safe">VERIFIED SAFE</div>
+          <div class="preset-info">
+            <strong>Legitimate Invoice</strong>
+            <small>Valid SPF/DKIM/DMARC, authentic origin</small>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <!-- TAB 3: EML / Raw Upload -->
+    <section id="emlTab" class="tab-content">
+      <div class="drop-zone" id="dropZone">
+        <input type="file" id="fileInput" accept=".eml,.txt" style="display: none;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom: 6px;">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="17 8 12 3 7 8"></polyline>
+          <line x1="12" y1="3" x2="12" y2="15"></line>
+        </svg>
+        <p>Drop <strong>.eml</strong> file here or <a href="#" id="browseLink">browse</a></p>
+      </div>
+      <div class="or-divider">OR PASTE RAW HEADERS &amp; BODY</div>
+      <textarea id="rawEmailText" placeholder="Paste RFC-822 formatted email content here..."></textarea>
+      <button id="btnAnalyzeRaw" class="btn btn-secondary secondary-btn">Analyze Custom Input</button>
+    </section>
+
+    <!-- Loading State with Spring Animation -->
+    <div id="loadingView" class="loading-view" style="display: none;">
+      <div class="spinner"></div>
+      <p id="loadingMsg">Evaluating threat signatures &amp; origin infrastructure...</p>
+    </div>
+
+    <!-- Result Dossier View -->
+    <section id="resultView" class="result-view" style="display: none;">
+      <div class="verdict-banner" id="verdictBanner">
+        <div class="score-circle" id="scoreCircle">
+          <span id="scoreValue">0</span>
+          <small>/100</small>
+        </div>
+        <div class="verdict-text">
+          <div class="verdict-title" id="verdictTitle">THREAT VERDICT</div>
+          <div class="verdict-class" id="verdictClassification">SAFE</div>
+        </div>
+      </div>
+
+      <div class="explanation-box" id="explanationText">
+        Analysis summary will appear here.
+      </div>
+
+      <!-- Signals Grid -->
+      <div class="signals-grid">
+        <div class="signal-item" id="sigNLP">
+          <span class="sig-title">Language Urgency</span>
+          <span class="sig-val" id="sigNLPVal">Normal</span>
+        </div>
+        <div class="signal-item" id="sigAuth">
+          <span class="sig-title">Authentication</span>
+          <span class="sig-val" id="sigAuthVal">Pass</span>
+        </div>
+        <div class="signal-item" id="sigUrls">
+          <span class="sig-title">Link Threat Flags</span>
+          <span class="sig-val" id="sigUrlsVal">0</span>
+        </div>
+        <div class="signal-item" id="sigGeo">
+          <span class="sig-title">Origin Location</span>
+          <span class="sig-val" id="sigGeoVal">—</span>
+        </div>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="result-actions">
+        <a id="btnOpenDashboard" href="#" target="_blank" class="btn btn-primary primary-btn dashboard-btn">
+          View Full Security Dossier ↗
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span>SIH-Guard Threat Engine</span>
+      <a id="footerDashboardLink" href="http://localhost:8000" target="_blank">Open Dashboard ↗</a>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+From: "Enterprise Cloud Billing" <billing@enterprise-cloud-services.com>
+To: <accounts-payable@company-domain.com>
+Subject: Invoice #INV-2026-09: Your Monthly Cloud Infrastructure Statement
+Date: Fri, 11 Sep 2026 08:00:00 +0000
+Message-ID: <inv.20260911.0019@enterprise-cloud-services.com>
+MIME-Version: 1.0
+Content-Type: text/html; charset=UTF-8
+Return-Path: <billing@enterprise-cloud-services.com>
+Received: from mail-relay.enterprise-cloud-services.com (142.250.190.46) by mx.google.com with ESMTPS; Fri, 11 Sep 2026 08:00:01 +0000
+Received-SPF: pass (google.com: domain of billing@enterprise-cloud-services.com designates 142.250.190.46 as permitted sender)
+Authentication-Results: mx.google.com; spf=pass; dkim=pass header.i=@enterprise-cloud-services.com; dmarc=pass
+
+<html>
+<body>
+  <h2>Enterprise Cloud Services</h2>
+  <p>Dear Valued Partner,</p>
+  <p>Your monthly billing invoice for September 2026 is now available. The total charge of $1,240.00 was processed using your corporate account ending in 4102.</p>
+  <p>To view your itemized resource consumption, bandwidth logs, and download past statements, visit the customer portal:</p>
+  <p><a href="https://enterprise-cloud-services.com/dashboard/invoices">Access Billing Dashboard</a></p>
+  <p>Thank you for choosing Enterprise Cloud Services.</p>
+  <small>Enterprise Cloud Services Inc., 1600 Amphitheatre Parkway, Mountain View, CA</small>
+</body>
+</html>

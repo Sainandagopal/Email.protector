@@ -1,0 +1,26 @@
+From: "PayPal Security Alert" <security-alert@paypa1-update-security.com>
+To: <target-user@company-domain.com>
+Subject: URGENT: Your PayPal Account Has Been Suspended - Action Required Immediately
+Date: Fri, 11 Sep 2026 04:15:22 +0000
+Message-ID: <20260911041522.paypal.alert.8841@paypa1-update-security.com>
+MIME-Version: 1.0
+Content-Type: text/html; charset=UTF-8
+Return-Path: <bounce@attacker-bulletproof-host.ru>
+Reply-To: <collector@attacker-bulletproof-host.ru>
+Received: from mail.attacker-bulletproof-host.ru (185.220.101.5) by mx.google.com with ESMTPS for <target-user@company-domain.com>; Fri, 11 Sep 2026 04:15:23 +0000
+Received-SPF: fail (domain of paypa1-update-security.com does not designate 185.220.101.5 as permitted sender)
+Authentication-Results: mx.google.com; spf=fail (google.com: domain of paypa1-update-security.com does not designate 185.220.101.5 as permitted sender) smtp.mailfrom=bounce@attacker-bulletproof-host.ru; dkim=fail; dmarc=fail
+
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>PayPal Security Department</h2>
+  <p>Dear Customer,</p>
+  <p>We recently detected unauthorized card transactions originating from unfamiliar IP <strong>185.220.101.5</strong>. As a preventative safety measure, your PayPal privileges have been temporarily frozen.</p>
+  <p>You must confirm your account password and verify your payment methods within 24 hours. Failure to verify will result in permanent account forfeiture.</p>
+  <p>
+    <a href="http://185.220.101.5/login?ref=paypal_verify">Click Here to Verify Your Identity Now</a>
+  </p>
+  <p>Sincerely,<br>PayPal Fraud Prevention Operations</p>
+</body>
+</html>
