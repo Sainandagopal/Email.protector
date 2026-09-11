@@ -72,7 +72,7 @@ export default function App() {
             <Shield size={20} />
           </div>
           <div>
-            <div className="brand-title">SIH-Guard</div>
+            <div className="brand-title">Email Protector</div>
             <div className="brand-sub">Security Platform</div>
           </div>
         </div>

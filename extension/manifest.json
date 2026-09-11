@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "SIH-Guard: AI Email Threat & Forensics",
+  "name": "Email Protector: AI Email Threat & Forensics",
   "version": "1.0.0",
   "description": "AI-Powered Email Threat Detection, GeoLocation and Forensic Intelligence Platform (SIH26106)",
   "icons": {
@@ -10,7 +10,7 @@
   },
   "action": {
     "default_popup": "src/popup/popup.html",
-    "default_title": "SIH-Guard Email Security",
+    "default_title": "Email Protector Security",
     "default_icon": {
       "16": "assets/icon16.png",
       "48": "assets/icon48.png",

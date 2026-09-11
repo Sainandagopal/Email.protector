@@ -3,7 +3,7 @@ import os
 from pydantic import BaseModel
 
 class Settings(BaseModel):
-    PROJECT_NAME: str = "SIH26106 Cyber Forensics Platform"
+    PROJECT_NAME: str = "Email Protector Platform"
     API_V1_STR: str = "/api/v1"
     DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///./forensics.db")
     DASHBOARD_URL: str = os.getenv("DASHBOARD_URL", "http://localhost:5173")
