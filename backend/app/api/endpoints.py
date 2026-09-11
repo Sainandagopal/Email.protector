@@ -494,7 +494,7 @@ def get_investigation_graph(inv_id: int, db: Session = Depends(get_db)):
             edges.append({
                 "source": sender_node_id,
                 "target": ip_node_id,
-                "label": "originated_from"
+                "label": "Sent Via"
             })
             ip_nodes_added.append(ip_node_id)
 
@@ -515,7 +515,7 @@ def get_investigation_graph(inv_id: int, db: Session = Depends(get_db)):
                 edges.append({
                     "source": sender_node_id,
                     "target": ip_node_id,
-                    "label": "relayed_through"
+                    "label": "Relayed To"
                 })
                 ip_nodes_added.append(ip_node_id)
 
@@ -541,7 +541,7 @@ def get_investigation_graph(inv_id: int, db: Session = Depends(get_db)):
                 edges.append({
                     "source": sender_node_id,
                     "target": infra_node_id,
-                    "label": "hosted_on"
+                    "label": "Hosted On"
                 })
                 ip_nodes_added.append(infra_node_id)
 
@@ -569,7 +569,7 @@ def get_investigation_graph(inv_id: int, db: Session = Depends(get_db)):
             edges.append({
                 "source": target_parent_id,
                 "target": url_node_id,
-                "label": "embedded_link"
+                "label": "Carries Link"
             })
             link_nodes_added.append(url_node_id)
 
@@ -594,7 +594,7 @@ def get_investigation_graph(inv_id: int, db: Session = Depends(get_db)):
             edges.append({
                 "source": target_parent_id,
                 "target": ioc_link_id,
-                "label": "embedded_link" if i.type == "url" else "associated_domain"
+                "label": "Carries Link" if i.type == "url" else "Linked Domain"
             })
             link_nodes_added.append(ioc_link_id)
 
@@ -619,14 +619,15 @@ def get_investigation_graph(inv_id: int, db: Session = Depends(get_db)):
             edges.append({
                 "source": ln,
                 "target": recipient_node_id,
-                "label": "delivered_to"
+                "label": "Delivered To"
             })
     else:
         edges.append({
             "source": target_parent_id,
             "target": recipient_node_id,
-            "label": "inbox_delivery"
+            "label": "Delivered To"
         })
+
 
     for idx, node in enumerate(nodes):
         if "x" not in node:
